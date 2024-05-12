@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: books-service-db
+  datasource:
+    url: jdbc:postgresql://localhost:5432/library
+    username: test
+    password: test
+  jpa:
+    show-sql: true
+logging:
+  level:
+    sql: info
+server:
+  port: 8081
