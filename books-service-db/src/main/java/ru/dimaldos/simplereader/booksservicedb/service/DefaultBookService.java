@@ -15,4 +15,9 @@ public class DefaultBookService implements BookService {
     public Book getBookById(Long id) {
         return bookRepository.findBookById(id);
     }
+
+    @Override
+    public Iterable<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
 }
