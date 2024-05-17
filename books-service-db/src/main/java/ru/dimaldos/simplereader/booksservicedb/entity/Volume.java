@@ -1,29 +1,34 @@
 package ru.dimaldos.simplereader.booksservicedb.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(
-        name = "chapters",
+        name = "volumes",
         schema = "bookshelf"
 )
-public class Chapter {
+public class Volume {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,14 +39,19 @@ public class Chapter {
     private String title;
 
     @NotNull
-    private int position;
+    @PositiveOrZero
+    private Integer Position;
 
     @JsonBackReference
     @ManyToOne
     @JoinColumn(
-            name = "volume_id",
+            name = "book_id",
             nullable = false
     )
-    private Volume volume;
+    private Book book;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "volume")
+    private List<Chapter> chapters;
 
 }

@@ -1,16 +1,19 @@
 package ru.dimaldos.simplereader.booksservicedb.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -18,10 +21,9 @@ import org.hibernate.annotations.Type;
 @AllArgsConstructor
 @Table(
         name = "books",
-        schema = "library"
+        schema = "bookshelf"
 )
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,6 +38,7 @@ public class Book {
     @Size(max = 1000)
     private String description;
 
-    @Type(TableOfContentsJson.class)
-    private TableOfContentsNode content;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "book")
+    private List<Volume> volumes;
 }
