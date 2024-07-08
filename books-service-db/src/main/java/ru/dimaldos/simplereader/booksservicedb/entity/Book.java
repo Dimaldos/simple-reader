@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -40,5 +41,6 @@ public class Book {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "book")
+    @OrderBy("position")
     private List<Volume> volumes;
 }
