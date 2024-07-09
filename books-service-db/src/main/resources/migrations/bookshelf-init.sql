@@ -1,9 +1,6 @@
+--liquibase formatted sql
+--changeset dimaldos:bookshelf-init
 create schema if not exists bookshelf;
-
-drop table if exists bookshelf.books cascade;
-drop table if exists bookshelf.volumes cascade;
-drop table if exists bookshelf.chapters cascade;
-drop table if exists bookshelf.contents cascade;
 
 create table bookshelf.books
 (

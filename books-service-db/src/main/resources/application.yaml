@@ -7,6 +7,8 @@ spring:
     password: test
   jpa:
     show-sql: true
+  liquibase:
+    change-log: migrations/changelog.xml
 logging:
   level:
     sql: info
