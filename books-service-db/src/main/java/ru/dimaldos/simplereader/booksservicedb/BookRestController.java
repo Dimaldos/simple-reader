@@ -12,9 +12,11 @@ import ru.dimaldos.simplereader.booksservicedb.service.BookService;
 import ru.dimaldos.simplereader.booksservicedb.service.ChapterService;
 import ru.dimaldos.simplereader.booksservicedb.service.VolumeService;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("db/books")
+@RequestMapping("db/bookshelf")
 public class BookRestController {
 
     private final BookService bookService;
@@ -22,31 +24,31 @@ public class BookRestController {
     private final ChapterService chapterService;
 
     @GetMapping
-    public Iterable<Book> getAllBooks() {
+    public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("{bookId:\\d+}")
+    @GetMapping("books/{bookId:\\d+}")
     public Book getBook(@PathVariable(name = "bookId") long bookId) {
         return bookService.getBookById(bookId);
     }
 
-    @GetMapping("{bookId:\\d+}/volumes")
-    public Iterable<Volume> getVolumesByBookId(@PathVariable(name = "bookId") long bookId) {
+    @GetMapping("books/{bookId:\\d+}/volumes")
+    public List<Volume> getVolumesByBookId(@PathVariable(name = "bookId") long bookId) {
         return volumeService.findVolumesByBook_id(bookId);
     }
 
-    @GetMapping("{bookId:\\d+}/volumes/{volumeId:\\d+}")
+    @GetMapping("volumes/{volumeId:\\d+}")
     public Volume getVolumeByVolumeId(@PathVariable(name = "volumeId") long volumeId) {
         return volumeService.findVolumeById(volumeId);
     }
 
-    @GetMapping("{bookId:\\d+}/volumes/{volumeId:\\d+}/chapters")
-    public Iterable<Chapter> getChaptersByVolumeId(@PathVariable(name = "volumeId") long volumeId) {
+    @GetMapping("volumes/{volumeId:\\d+}/chapters")
+    public List<Chapter> getChaptersByVolumeId(@PathVariable(name = "volumeId") long volumeId) {
         return chapterService.findChaptersByVolumeId(volumeId);
     }
 
-    @GetMapping("{bookId:\\d+}/volumes/{volumeId:\\d+}/chapters/{chapterId:\\d+}")
+    @GetMapping("chapters/{chapterId:\\d+}")
     public Chapter getChapterById(@PathVariable(name = "chapterId") long chapterId) {
         return chapterService.findChapterById(chapterId);
     }
