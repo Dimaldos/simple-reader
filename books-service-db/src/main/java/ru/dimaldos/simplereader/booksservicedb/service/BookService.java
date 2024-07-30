@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import ru.dimaldos.simplereader.booksservicedb.entity.Book;
 import ru.dimaldos.simplereader.booksservicedb.repository.BookRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class BookService{
+public class BookService {
 
     private final BookRepository bookRepository;
 
@@ -15,7 +17,7 @@ public class BookService{
         return bookRepository.findBookById(id);
     }
 
-    public Iterable<Book> getAllBooks() {
-        return bookRepository.findAll   ();
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
     }
 }

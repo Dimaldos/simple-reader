@@ -7,6 +7,8 @@ import ru.dimaldos.simplereader.booksservicedb.entity.Content;
 import ru.dimaldos.simplereader.booksservicedb.repository.ChapterRepository;
 import ru.dimaldos.simplereader.booksservicedb.repository.ContentRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ChapterService {
@@ -14,7 +16,7 @@ public class ChapterService {
     private final ChapterRepository chapterRepository;
     private final ContentRepository contentRepository;
 
-    public Iterable<Chapter> findChaptersByVolumeId(Long bookId) {
+    public List<Chapter> findChaptersByVolumeId(Long bookId) {
         return chapterRepository.findChaptersByVolume_Id(bookId);
     }
 
